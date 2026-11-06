@@ -44,6 +44,8 @@ print("labels:", len(lab), lab["label"].value_counts().to_dict())
 exp = pd.read_csv(R / "step4/step4_active_expansion_rounds.csv")
 r1, r2 = set(exp.loc[exp["round"] == 1, "doi"]), set(exp.loc[exp["round"] == 2, "doi"])
 no = lab["label"] == "no"
+agree = norm(exp["expert_label"]) == norm(exp["llm_suggestion"])
+print(f"expansion candidates: {len(exp)} | expert agreed with the LLM suggestion: {int(agree.sum())} ({agree.mean():.0%})")
 print("not-relevant labels: initial", int((no & ~lab.doi.isin(r1 | r2)).sum()),
       "| after round 1", int((no & ~lab.doi.isin(r2)).sum()), "| after round 2", int(no.sum()))
 
@@ -79,4 +81,7 @@ for v, thr in THRESHOLDS.items():
     print(f"  sentence states the vector: {int(a.states_vector.sum())} of {len(a)} ({a.states_vector.mean():.2f})")
     print(f"  after verifier: label accepted {fmt(int(kept.correct.sum()), len(kept))}, "
           f"states the vector {int(kept.states_vector.sum())} of {len(kept)} ({kept.states_vector.mean():.2f})")
+    tv = a[a.states_vector]
+    print(f"  conditional recall of the verifier (sentences that state the vector and are kept): "
+          f"{int((tv.p_yes >= thr).sum())} of {len(tv)} ({(tv.p_yes >= thr).mean():.2f})")
     print(f"  verifier AUC (target: sentence states the vector): {roc_auc_score(a.states_vector, a.p_yes):.2f}")

@@ -290,7 +290,7 @@ doi,round,expert_label,llm_suggestion,llm_reason
 10.1016/j.xphs.2024.07.023,2,no,no,"random, topic 23"
 10.1002/ddr.22223,2,no,no,"random, topic 23"
 10.1021/acssuschemeng.5c06122,2,yes,yes,"random, topic 23"
-10.1002/cjce.24811,2,yes\,no,"random, topic 23"
+10.1002/cjce.24811,2,yes,no,"random, topic 23"
 10.1021/jacsau.6c00596,2,no,no,"random, topic 23"
 10.1021/acs.iecr.8b04584,2,no,no,"random, topic 23"
 10.1021/acsomega.9b04119,2,no,no,"random, topic 23"
