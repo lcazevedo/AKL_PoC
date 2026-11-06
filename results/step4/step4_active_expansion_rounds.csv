@@ -1,0 +1,301 @@
+doi,round,expert_label,llm_suggestion,llm_reason
+10.1109/jsen.2016.2530944,1,no,no,low P(yes)
+10.1002/exp.20230028,1,no,no,low P(yes)
+10.3390/s21113838,1,no,no,low P(yes)
+10.3389/fnano.2023.1268931,1,no,no,low P(yes)
+10.1038/s44222-023-00102-z,1,no,no,low P(yes)
+10.1021/acs.jcim.9b01051,1,no,no,low P(yes)
+10.1039/d0ta08547b,1,no,no,low P(yes)
+10.3390/electronics11060848,1,no,no,low P(yes)
+10.3390/app13010587,1,no,no,low P(yes)
+10.1016/j.trac.2023.117473,1,no,no,low P(yes)
+10.3390/s26061970,1,no,no,low P(yes)
+10.1007/s11814-024-00318-8,1,no,no,low P(yes)
+10.1016/j.bios.2020.112349,1,no,no,low P(yes)
+10.1016/j.biomaterials.2023.122075,1,no,no,low P(yes)
+10.2147/ijn.s459905,1,no,no,low P(yes)
+10.1002/adfm.202403562,1,no,no,low P(yes)
+10.3390/bios11090295,1,no,no,low P(yes)
+10.1166/jnn.2020.18714,1,no,no,low P(yes)
+10.1016/j.cocis.2023.101718,1,no,no,low P(yes)
+10.1016/j.cej.2021.132966,1,no,no,low P(yes)
+10.3390/app9081658,1,no,no,low P(yes)
+10.3390/s26010145,1,no,no,low P(yes)
+10.1016/j.jconrel.2026.115012,1,no,no,low P(yes)
+10.2174/0109298673490100260812043453,1,no,no,low P(yes)
+10.1016/j.apenergy.2024.123062,1,no,no,low P(yes)
+10.1016/j.phymed.2025.156379,1,no,no,low P(yes)
+10.1016/s0956-5663(03)00041-1,1,no,no,low P(yes)
+10.3390/electronics8020124,1,no,no,low P(yes)
+10.1039/d5an00739a,1,no,no,low P(yes)
+10.3390/app11199118,1,no,no,low P(yes)
+10.3390/s22041306,1,no,no,low P(yes)
+10.1155/2013/830341,1,no,no,low P(yes)
+10.1016/j.phymed.2026.158025,1,no,no,low P(yes)
+10.1016/j.jpowsour.2016.09.061,1,no,no,low P(yes)
+10.1016/j.susmat.2026.e02288,1,no,no,low P(yes)
+10.1080/15567036.2021.1986174,1,no,no,low P(yes)
+10.1038/s41378-020-0172-0,1,no,no,low P(yes)
+10.1039/d6tb00411c,1,no,no,low P(yes)
+10.14447/jnmes.v27i4.a04,1,no,no,low P(yes)
+10.2174/0113895575415429251007093531,1,no,no,low P(yes)
+10.1016/j.matt.2024.05.023,1,no,no,low P(yes)
+10.1002/adhm.201900425,1,no,no,low P(yes)
+10.1002/adma.202303267,1,no,no,low P(yes)
+10.1007/s11030-026-11545-y,1,no,no,low P(yes)
+10.1016/j.bioorg.2026.110474,1,no,no,low P(yes)
+10.1016/j.bios.2025.117196,1,no,no,low P(yes)
+10.1016/j.jece.2026.124354,1,no,no,low P(yes)
+10.1021/acsami.2c17467,1,no,no,low P(yes)
+10.1021/acsami.4c05112,1,no,no,low P(yes)
+10.1021/acs.nanolett.1c03240,1,no,no,low P(yes)
+10.3390/app13105871,1,no,no,low P(yes)
+10.3390/app15179290,1,no,no,low P(yes)
+10.1016/j.apenergy.2016.11.057,1,no,no,low P(yes)
+10.3390/s23052517,1,no,no,low P(yes)
+10.3390/s16081328,1,no,no,low P(yes)
+10.1007/s10973-026-16272-y,1,no,no,low P(yes)
+10.3390/s23073536,1,no,no,low P(yes)
+10.1016/j.apenergy.2012.02.044,1,no,no,low P(yes)
+10.3390/electronics15184327,1,no,no,low P(yes)
+10.1088/1361-6439/ad63b2,1,no,no,low P(yes)
+10.1016/j.scca.2025.100156,1,no,no,low P(yes)
+10.1063/5.0303661,1,no,no,low P(yes)
+10.1177/13835416251328796,1,no,no,low P(yes)
+10.1016/j.cep.2023.109646,1,no,no,low P(yes)
+10.3390/batteries8110219,1,no,no,random (doubtful topic)
+10.18494/sam5674,1,no,no,low P(yes)
+10.1021/acs.energyfuels.5c00165,1,no,no,low P(yes)
+10.1016/j.apenergy.2015.09.047,1,no,no,random (doubtful topic)
+10.1007/s13399-025-06996-6,1,no,no,low P(yes)
+10.3390/mi10120814,1,no,no,low P(yes)
+10.3390/jmmp6060135,1,no,no,low P(yes)
+10.3390/s21165261,1,no,no,random (doubtful topic)
+10.1109/tdei.2009.4815193,1,no,no,low P(yes)
+10.1016/j.cej.2024.156633,1,no,no,low P(yes)
+10.1002/admt.202100405,1,no,no,low P(yes)
+10.1515/nanoph-2023-0569,1,no,no,low P(yes)
+10.1088/1361-665x/acca55,1,no,no,low P(yes)
+10.3390/s20216134,1,no,no,low P(yes)
+10.1016/j.matlet.2020.127343,1,no,no,low P(yes)
+10.1016/j.foodchem.2025.146630,1,no,no,low P(yes)
+10.1016/j.trac.2025.118156,1,no,no,random (doubtful topic)
+10.3390/s20226585,1,no,no,random (doubtful topic)
+10.1039/d2ta08628j,1,no,no,random (doubtful topic)
+10.1002/adma.73544,1,no,no,random (doubtful topic)
+10.1016/j.cej.2017.12.134,1,no,no,random (doubtful topic)
+10.1177/19373368261460324,1,no,no,random (doubtful topic)
+10.1002/smll.74244,1,no,no,random (doubtful topic)
+10.1016/j.apenergy.2025.125385,1,no,no,random (doubtful topic)
+10.1002/cjce.20363,1,no,no,boundary
+10.1021/acs.jcim.4c01519,1,no,no,boundary
+10.1002/anie.202318380,1,no,no,boundary
+10.1007/s11468-024-02712-8,1,no,no,boundary
+10.1016/j.memsci.2018.09.071,1,no,no,boundary
+10.3389/fchem.2024.1395359,1,no,no,boundary
+10.1016/j.ijhydene.2022.10.165,1,no,no,boundary
+10.1080/08927022.2020.1804564,1,no,no,boundary
+10.1061/(asce)cc.1943-5614.0000477,1,no,no,boundary
+10.1142/s2251237325500066,1,no,no,boundary
+10.1016/j.mseb.2023.116770,1,no,no,boundary
+10.1016/j.jchromb.2012.01.012,1,no,no,boundary
+10.1016/j.wear.2009.07.021,1,no,no,boundary
+10.1016/j.addma.2026.105313,1,no,no,boundary
+10.1038/s41598-025-03803-0,1,no,no,boundary
+10.1021/acs.analchem.4c03681,1,no,no,boundary
+10.1039/d5cc04968g,1,no,no,boundary
+10.1021/acsami.6c13231,1,no,no,boundary
+10.1109/ted.2025.3598233,1,no,no,boundary
+10.1007/s11030-024-11079-1,1,no,no,random (doubtful topic)
+10.3390/electronics7090189,1,yes,no,low P(yes)
+10.1039/d5lc00908a,1,yes,no,low P(yes)
+10.3390/electronics11172695,1,yes,yes,low P(yes)
+10.1039/d6dd00024j,1,yes,yes,low P(yes)
+10.1039/d4dd00387j,1,yes,yes,low P(yes)
+10.1038/s41570-025-00747-x,1,yes,yes,low P(yes)
+10.1016/j.apenergy.2024.124760,1,yes,yes,low P(yes)
+10.1016/j.slast.2025.100378,1,yes,yes,low P(yes)
+10.1007/s10853-024-09519-2,1,yes,no,low P(yes)
+10.1016/j.ijhydene.2024.12.292,1,yes,yes,low P(yes)
+10.1007/s00449-012-0753-x,1,yes,yes,low P(yes)
+10.1177/2472630318788533,1,yes,no,low P(yes)
+10.1016/j.optlastec.2022.108551,1,yes,yes,low P(yes)
+10.3390/app142311389,1,yes,no,random (doubtful topic)
+10.1016/j.ijhydene.2021.10.130,1,yes,yes,random (doubtful topic)
+10.1007/s00216-026-06800-y,1,yes,yes,random (doubtful topic)
+10.1002/adma.74379,1,yes,yes,random (doubtful topic)
+10.1016/j.jpowsour.2025.238405,1,yes,yes,random (doubtful topic)
+10.3390/batteries11070276,1,yes,yes,random (doubtful topic)
+10.1016/j.jpowsour.2026.241418,1,yes,yes,random (doubtful topic)
+10.1016/j.jechem.2023.11.009,1,yes,no,random (doubtful topic)
+10.1016/j.mser.2025.100983,1,yes,yes,random (doubtful topic)
+10.1021/acsaelm.6c00843,1,yes,yes,random (doubtful topic)
+10.1080/1062936x.2011.645876,1,yes,yes,random (doubtful topic)
+10.1016/j.compositesb.2026.113480,1,yes,yes,boundary
+10.1016/j.ces.2007.11.024,1,yes,yes,boundary
+10.1109/tsm.2024.3439271,1,yes,yes,boundary
+10.1109/jsen.2026.3715700,1,yes,yes,boundary
+10.1016/j.jpowsour.2025.236929,1,yes,yes,boundary
+10.1149/1945-7111/adb214,1,yes,yes,boundary
+10.1002/aelm.70480,1,yes,yes,boundary
+10.1021/acsnano.0c09424,1,yes,yes,boundary
+10.1038/s41467-026-68936-w,1,yes,yes,boundary
+10.3390/pr11092751,1,yes,yes,boundary
+10.1007/s11581-024-05981-9,1,yes,yes,boundary
+10.1016/j.compstruct.2025.119106,1,yes,yes,boundary
+10.1002/eng2.70428,1,yes,yes,boundary
+10.1016/j.apenergy.2021.118244,1,yes,yes,boundary
+10.1016/j.jpowsour.2025.239130,1,yes,yes,boundary
+10.1016/j.apenergy.2023.122399,1,yes,yes,boundary
+10.1016/j.jmrt.2026.08.206,1,yes,yes,boundary
+10.1016/j.fuel.2022.126979,1,yes,yes,boundary
+10.1016/j.cdc.2026.101251,1,yes,yes,boundary
+10.1021/acssensors.6c00534,1,yes,yes,boundary
+10.1016/j.fuproc.2008.09.008,1,yes,yes,boundary
+10.2533/chimia.2023.7,1,yes,yes,boundary
+10.1016/j.powtec.2025.121143,1,yes,yes,boundary
+10.1016/j.cej.2026.175829,1,yes,yes,boundary
+10.1016/j.solmat.2026.114613,1,yes,yes,boundary
+10.1002/adv.21365,1,yes,yes,boundary
+10.1016/j.ces.2025.121413,1,yes,yes,boundary
+10.1016/j.jajp.2025.100289,1,yes,yes,boundary
+10.1088/2053-1591/ad61c0,1,yes,yes,boundary
+10.1002/adhm.202503154,1,yes,yes,boundary
+10.1016/j.sajce.2026.100861,1,yes,yes,boundary
+10.1039/d6ra08243b,1,yes,yes,boundary
+10.1021/acsami.2c15362,1,yes,yes,boundary
+10.1016/j.optlastec.2026.116583,1,yes,yes,boundary
+10.1016/j.fluid.2019.112357,1,yes,yes,boundary
+10.1016/j.tca.2019.03.040,1,yes,yes,boundary
+10.1007/s10853-026-12759-z,1,yes,yes,boundary
+10.1515/rams-2022-0028,1,yes,yes,boundary
+10.1016/j.clay.2025.108007,1,yes,yes,boundary
+10.1039/d5ra09141a,1,yes,yes,boundary
+10.1142/s1793292026500712,1,yes,yes,boundary
+10.1021/acsanm.3c02676,1,yes,yes,random (doubtful topic)
+10.3390/app11094180,1,yes,yes,random (doubtful topic)
+10.1021/acssensors.2c02159,1,yes,yes,random (doubtful topic)
+10.1002/advs.202309862,1,yes,yes,random (doubtful topic)
+10.1002/adfm.202314790,1,yes,yes,random (doubtful topic)
+10.1021/acs.analchem.0c00768,1,yes,yes,random (doubtful topic)
+10.1088/2632-2153/abee59,1,yes,yes,random (doubtful topic)
+10.1142/s2737416523500242,2,no,no,boundary (0.4-0.6)
+10.1111/cbdd.13479,2,yes,yes,boundary (0.4-0.6)
+10.1002/aenm.202100918,2,no,no,boundary (0.4-0.6)
+10.1016/j.ccr.2024.216340,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.jallcom.2024.176930,2,yes,yes,boundary (0.4-0.6)
+10.1002/cbic.202100484,2,yes,no,boundary (0.4-0.6)
+10.1021/ci034032s,2,no,no,boundary (0.4-0.6)
+10.1016/j.fuproc.2026.108609,2,yes,no,boundary (0.4-0.6)
+10.1109/jsen.2026.3674071,2,no,no,boundary (0.4-0.6)
+10.3390/app132112059,2,yes,no,boundary (0.4-0.6)
+10.1016/j.device.2025.100757,2,yes,no,boundary (0.4-0.6)
+10.1016/j.jpowsour.2024.235601,2,no,no,boundary (0.4-0.6)
+10.1007/s10853-026-13657-0,2,no,no,boundary (0.4-0.6)
+10.1021/acsami.3c11283,2,no,no,boundary (0.4-0.6)
+10.1039/d3sc06441g,2,no,no,boundary (0.4-0.6)
+10.1016/j.matlet.2026.141643,2,no,no,boundary (0.4-0.6)
+10.1063/5.0068862,2,yes,yes,boundary (0.4-0.6)
+10.1038/s43246-022-00319-2,2,yes,yes,boundary (0.4-0.6)
+10.3390/batteries9100508,2,no,no,boundary (0.4-0.6)
+10.1021/acs.jcim.9b00447,2,no,no,boundary (0.4-0.6)
+10.3390/nano15191481,2,yes,yes,boundary (0.4-0.6)
+10.1002/minf.201600011,2,no,no,boundary (0.4-0.6)
+10.1109/ted.2023.3274502,2,no,no,boundary (0.4-0.6)
+10.3390/batteries10090297,2,no,no,boundary (0.4-0.6)
+10.1016/j.chemolab.2021.104346,2,no,no,boundary (0.4-0.6)
+10.3390/electronics13122297,2,no,no,boundary (0.4-0.6)
+10.1007/s12668-024-01326-y,2,no,no,boundary (0.4-0.6)
+10.1016/j.matchemphys.2020.124125,2,no,no,boundary (0.4-0.6)
+10.1021/acs.iecr.3c00975,2,yes,yes,boundary (0.4-0.6)
+10.3390/pr9091560,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.jece.2026.122258,2,no,no,boundary (0.4-0.6)
+10.1016/j.ijbiomac.2026.154818,2,yes,yes,boundary (0.4-0.6)
+10.1007/s40964-025-01112-6,2,yes,yes,boundary (0.4-0.6)
+10.1021/acssensors.6c01489,2,yes,yes,boundary (0.4-0.6)
+10.1039/d5sc07051a,2,yes,yes,boundary (0.4-0.6)
+10.3390/catal15040317,2,yes,yes,boundary (0.4-0.6)
+10.1021/acs.chemmater.6c01595,2,yes,yes,boundary (0.4-0.6)
+10.1109/jsen.2024.3374354,2,yes,yes,boundary (0.4-0.6)
+10.1088/1361-665x/ae2f0c,2,yes,yes,boundary (0.4-0.6)
+10.1002/aic.690490914,2,yes,yes,boundary (0.4-0.6)
+10.1051/mfreview/2026011,2,yes,yes,boundary (0.4-0.6)
+10.1109/ted.2024.3445311,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.corsci.2026.113864,2,yes,yes,boundary (0.4-0.6)
+10.1007/s11665-025-10932-0,2,yes,yes,boundary (0.4-0.6)
+10.1063/5.0334702,2,no,no,boundary (0.4-0.6)
+10.1016/j.ijbiomac.2025.143388,2,yes,yes,boundary (0.4-0.6)
+10.1021/acs.nanolett.7b01082,2,no,no,boundary (0.4-0.6)
+10.1016/j.ijbiomac.2024.138643,2,yes,no,boundary (0.4-0.6)
+10.1109/jsen.2025.3557819,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.compchemeng.2021.107266,2,no,no,boundary (0.4-0.6)
+10.1016/j.ensm.2025.104450,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.jmps.2024.105879,2,no,no,boundary (0.4-0.6)
+10.1007/s11581-024-05954-y,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.tibtech.2023.09.015,2,no,no,boundary (0.4-0.6)
+10.1016/j.surfrep.2020.100509,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.nxmate.2026.101782,2,yes,yes,boundary (0.4-0.6)
+10.32604/cmc.2023.029838,2,no,no,boundary (0.4-0.6)
+10.1016/j.ijbiomac.2024.131987,2,yes,yes,boundary (0.4-0.6)
+10.1021/acs.accounts.6b00261,2,no,yes,boundary (0.4-0.6)
+10.1177/1045389x17704984,2,yes,yes,boundary (0.4-0.6)
+10.3390/electronics13020410,2,no,no,boundary (0.4-0.6)
+10.1080/14686996.2022.2162323,2,no,no,boundary (0.4-0.6)
+10.1002/adma.75237,2,yes,yes,boundary (0.4-0.6)
+10.3390/biomimetics9030157,2,no,no,boundary (0.4-0.6)
+10.1016/j.apenergy.2026.128630,2,no,no,boundary (0.4-0.6)
+10.1016/j.apenergy.2020.115242,2,no,no,boundary (0.4-0.6)
+10.1109/tmag.2017.2698401,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.ijhydene.2024.10.108,2,no,no,boundary (0.4-0.6)
+10.3390/app131810465,2,no,yes,boundary (0.4-0.6)
+10.1021/acs.iecr.3c03542,2,no,no,boundary (0.4-0.6)
+10.1107/s1600577524011469,2,no,no,boundary (0.4-0.6)
+10.1021/acs.analchem.1c05208,2,no,no,boundary (0.4-0.6)
+10.1016/j.jpowsour.2024.234670,2,yes,yes,boundary (0.4-0.6)
+10.3390/electronics11010117,2,no,no,boundary (0.4-0.6)
+10.1007/s11581-025-06551-3,2,yes,yes,boundary (0.4-0.6)
+10.1111/ffe.13904,2,yes,yes,boundary (0.4-0.6)
+10.1021/acs.jpcc.1c07973,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.apenergy.2024.123941,2,yes,yes,boundary (0.4-0.6)
+10.1002/smll.75137,2,yes,yes,boundary (0.4-0.6)
+10.56947/amcs.v18.218,2,no,no,boundary (0.4-0.6)
+10.2516/stet/2026032,2,no,no,boundary (0.4-0.6)
+10.1088/2053-1591/aabb5d,2,yes,no,boundary (0.4-0.6)
+10.1007/s10853-026-13040-z,2,no,no,boundary (0.4-0.6)
+10.1016/j.foodchem.2024.140213,2,no,no,boundary (0.4-0.6)
+10.1016/j.ensm.2026.105595,2,yes,yes,boundary (0.4-0.6)
+10.1039/d5ta04817f,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.cej.2024.150816,2,yes,yes,boundary (0.4-0.6)
+10.17559/tv-20250722002854,2,yes,yes,boundary (0.4-0.6)
+10.1039/c9ta06712d,2,yes,yes,boundary (0.4-0.6)
+10.1016/j.compchemeng.2009.01.009,2,no,no,boundary (0.4-0.6)
+10.1002/minf.201900087,2,yes,yes,"random, topic 23"
+10.1016/j.chemolab.2012.11.008,2,no,no,"random, topic 23"
+10.1021/acs.jpclett.2c03680,2,no,no,"random, topic 23"
+10.1016/j.chemolab.2007.12.005,2,no,yes,"random, topic 23"
+10.1016/j.mcat.2025.115078,2,yes,yes,"random, topic 23"
+10.1021/acs.jpclett.5c03438,2,no,no,"random, topic 23"
+10.2298/ciceq200907048l,2,yes,yes,"random, topic 23"
+10.1016/j.microc.2026.118343,2,no,no,"random, topic 23"
+10.1016/j.proci.2024.105658,2,yes,yes,"random, topic 23"
+10.1016/j.chroma.2016.12.025,2,yes,yes,"random, topic 23"
+10.1016/j.mattod.2026.103265,2,no,no,"random, topic 23"
+10.3390/catal13081228,2,no,no,"random, topic 23"
+10.3390/molecules24213908,2,no,no,"random, topic 23"
+10.1088/1361-651x/aa8369,2,yes,yes,"random, topic 23"
+10.1002/mrc.5234,2,yes,yes,"random, topic 23"
+10.2533/chimia.2021.1031,2,no,no,"random, topic 23"
+10.1016/j.ijbiomac.2025.146666,2,no,no,"random, topic 23"
+10.1021/acs.jcim.5c01600,2,yes,yes,"random, topic 23"
+10.1016/j.xphs.2024.07.023,2,no,no,"random, topic 23"
+10.1002/ddr.22223,2,no,no,"random, topic 23"
+10.1021/acssuschemeng.5c06122,2,yes,yes,"random, topic 23"
+10.1002/cjce.24811,2,yes\,no,"random, topic 23"
+10.1021/jacsau.6c00596,2,no,no,"random, topic 23"
+10.1021/acs.iecr.8b04584,2,no,no,"random, topic 23"
+10.1021/acsomega.9b04119,2,no,no,"random, topic 23"
+10.1021/acs.jctc.6c01063,2,yes,yes,"random, topic 23"
+10.1063/5.0222122,2,yes,yes,"random, topic 23"
+10.1007/s10847-011-0006-7,2,yes,yes,"random, topic 23"
+10.1039/d5dd00015g,2,yes,yes,"random, topic 23"
+10.1016/j.bmcl.2008.10.125,2,no,no,"random, topic 23"

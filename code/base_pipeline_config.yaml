@@ -1,0 +1,317 @@
+# pipeline_config.yaml
+# AKL pipeline technical configurations
+# Modify here and restart the affected step to apply
+
+# ── Models ──────────────────────────────────────────
+models:
+  embedding: "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+  #llm_extraction: "TinyLlama/TinyLlama-1.1B-Chat-v1.0" # Dev model
+  llm_extraction: "RedHatAI/gemma-3-4b-it-quantized.w8a8" # Test Model
+  llm_agent: "claude-sonnet-4-6"           # documentation only (no worker reads it): record the orchestrator model you actually used
+  setfit_base: "all-MiniLM-L6-v2"   # "sentence-transformers/paraphrase-mpnet-base-v2"
+
+# ── Remote embedding server (OpenAI-compatible, e.g. vLLM --runner pooling) ─────────────
+# Steps 3 and 6 can embed on a GPU server instead of the local machine. The model must match models.embedding.
+embedding_server:
+  enabled: false
+  base_url: "http://localhost:8001/v1"
+  model: "BAAI/bge-base-en-v1.5"
+  batch_size: 64
+  max_tokens: 512        # per-text truncation; must be <= the server's max_model_len
+  timeout: 120
+
+
+# ── OpenAlex enrichment (workers/step1b_openalex_enrichment.py) ──────────────────────
+# One pass over the DOIs: citations per year, FWCI, retraction flag, references, funders, OA status, primary topic.
+# The API key is read from OPENALEX_API_KEY (environment or .env).
+enrichment_openalex:
+  enabled: true
+  corpus_file: "data/02_intermediate/step5_corpus_filtered_relevant.pkl"   # falls back to the Step 2 clean corpus
+  batch_size: 50           # DOIs per request (OpenAlex maximum for the OR filter)
+  workers: 4               # parallel requests
+  save_every_batches: 40   # cache checkpoint
+
+# ── Step 2 — Cleaning ───────────────────────────────
+step2_cleaning:
+  required_fields: []   # ex: ["source_journal", "doi"]
+  year_min: null        # analysis window; null = no limit
+  year_max: null        # use the last COMPLETE year when the current one is partial
+  language_filter: ["en"]   # keep only these languages; on title/abstract disagreement the abstract language wins
+  detect_language: true
+
+# ── Step 3 — BERTopic ───────────────────────────────
+step3_bertopic:
+  evoc_random_state: 42      # EVoC seed (same seed + same embeddings => same layers)
+  min_topic_size: 10
+  nr_topics: "auto"
+  embedding_prompt: null  # null = no prompt; string = domain-specific prompt
+  embedding_device: "gpu"  # "cpu" or "cuda"; use CPU to save GPU for vLLM
+  min_df: 2  # reduced for small corpus (32 docs)
+  llm_nr_docs: 2  # documents per topic sent to the LLM; reduced due to 2048 token limit
+  llm_doc_length: 250   # words per document in the naming prompt (keeps it under the server context)
+
+# ── Step 4 — Curation ───────────────────────────────
+step4_curation:
+  sample_size: 240   # documents sampled for specialist validation (split across topics)
+
+# ── Step 5 — SetFit ─────────────────────────────────
+step5_setfit:
+  num_epochs: 1
+  min_samples_per_class: 8   # warns if a class has fewer than this
+  batch_size: 16
+  num_iterations: 10             # contrastive pairs per example (20 = SetFit default; lower = much faster)
+  sampling_strategy: "oversampling"
+  class_weight: "balanced"       # head class weights, helps when "no" is scarce
+  decision_threshold: 0.5        # P(yes) cut-off
+  group_by_topic: true           # grouped split: no topic leakage between train and test
+  retention_check: true          # re-apply the model to all labelled documents
+  save_proba_yes: true           # keep P(yes) for the Step 8 boundary audit
+
+# ── Step 6 — EVOC ───────────────────────────────────
+step6_evoc:
+  min_cluster_size: 5
+  metric: "cosine"
+  min_df: 1                      # must be <= number of topics in the first EVoC layer
+  evoc_random_state: 42          # seed: same seed + same embeddings => same layers
+  max_topics_to_name: 100        # layers with more topics get CVI/Kneedle metrics but no LLM names
+  reuse_step3_embeddings: true   # reuse Step 3 vectors when model/backend/text are identical
+  llm_doc_length: 250
+
+# ── Step 7 — Semantic extraction ─────────────────────
+step7_extraction:
+  chunk_unit: "sentence"     # "sentence" or "abstract"
+  vectors:
+    - name: "challenges"
+      prompt: "Identify the main challenges described in this text fragment: {text}"
+    - name: "directions"
+      prompt: "Identify future research directions mentioned in this text fragment: {text}"
+    - name: "controversies"
+      prompt: "Identify any controversies or disagreements described in this text fragment: {text}"
+  # To add a new vector, copy the block above and adjust name and prompt
+  # NOTE: the vectors actually used are the active rows of the table in Section 7 of project_config.md.
+  max_abstract_words: 350        # truncation so the prompt fits the server max_model_len
+  sentence_prefilter:            # cue-word filter before the LLM (cheap, but loses recall: measure it with the pilot)
+    enabled: false
+    cues: [limit, challeng, however, despite, lack, future, further, promising]
+  sentence_classifier:           # supervised sentence classifier as a precision filter (workers/step7_sentence_filter.py)
+    enabled: false
+    model_dir: "data/checkpoints/sentence_classifier"
+    threshold: 0.5
+    batch_size: 64
+    max_length: 128
+    vectors: {challenges: Challenge, directions: Direction}
+  sentence_verifier:             # LLM yes/no verifier as a precision filter (workers/step7_sentence_verifier.py)
+    enabled: false               # recommended after auditing the sentence-level vectors
+    base_urls: []                # empty = step7_vllm.base_url; list several to split the load
+    thresholds: {challenges: 0.2, directions: 0.5}
+    concurrency: 24
+    checkpoint_every: 4000
+
+# ── Step 7 — vLLM server ────────────────────────────
+step7_vllm:
+  base_url: "http://localhost:8000/v1"  # address of your vLLM server (local machine by default)
+  # base_urls: ["http://host1:8000/v1", "http://host2:8000/v1"]   # optional: split calls across replicas; unreachable ones are skipped
+  max_tokens: 512
+  temperature: 0.1
+  batch_size: 32             # adjust according to available VRAM
+  
+  # -- Server configuration (Docker Container) --
+  server:
+    port: 8000
+    max_model_len: 2048
+    dtype: "bfloat16"        # Gemma 3 requires bfloat16 or "half" (for example, on older GPUs)
+    gpu_memory_utilization: 0.8
+    enforce_eager: true           # true to save VRAM during the start
+    # port: 8000
+    # max_model_len: 102944
+    # dtype: "auto"
+    # gpu_memory_utilization: 0.9
+    # enforce_eager: false
+
+# ── Step 9 — Visualizations ──────────────────────────
+step9_output:
+  last_complete_year: 2025   # time series stop here (the current year is partial)
+  figures_format: "png"
+  figures_dpi: 150
+  include_standard: true    # always generates the standard set of visualizations
+
+# ── Audits (Step 8 — Expert Study & Synthesis) ──────
+# Generic audit framework: sample classified items, have the specialist
+# review them at the Step 8 breakpoint, and compute accuracy/precision/recall/F1.
+# Each audit exports data/03_review/step8_audit_<name>.xlsx for review and
+# produces metrics in data/04_reports/step8_audit_report.md.
+# Run: ./run_worker.sh workers/audit_framework.py export   (Step 8 Phase 1)
+#      ./run_worker.sh workers/audit_framework.py compute  (Step 8 Phase 2)
+audits:
+  challenges_micro:
+    enabled: true
+    sample_size: 100
+    source: "step7_extractions"      # "step7_extractions" or "step5_corpus"
+    filter_vector: "challenges"      # vector name from Section 7 ("" = all vectors)
+    predicted_col: "micro_label"     # column holding the predicted label
+    gold_col: "audit_label"          # column the specialist fills during review
+    description: "Audit of challenge micro-label extractions (sentence level)"
+  directions_micro:
+    enabled: true
+    sample_size: 100
+    source: "step7_extractions"
+    filter_vector: "directions"
+    predicted_col: "micro_label"
+    gold_col: "audit_label"
+    description: "Audit of direction micro-label extractions (sentence level)"
+  controversies_micro:
+    enabled: false
+    sample_size: 100
+    source: "step7_extractions"
+    filter_vector: "controversies"
+    predicted_col: "micro_label"
+    gold_col: "audit_label"
+    description: "Audit of controversy micro-label extractions (sentence level)"
+  macro_categories:
+    enabled: false
+    sample_size: 50
+    source: "step7_extractions"
+    filter_vector: ""                # "" = sample across all vectors
+    predicted_col: "macro_category"
+    gold_col: "audit_label"
+    description: "Audit of macro-category naming across all vectors"
+  boundary:
+    enabled: true
+    sample_size: 100
+    source: "step5_full_predictions" # all docs with P(yes), both sides of the boundary
+    filter_range:                    # reviewer validation #2: decision boundary
+      column: "proba_yes"
+      min: 0.40
+      max: 0.60
+    predicted_col: "predicted_relevance"
+    gold_col: "audit_label"
+    columns: ["doi", "title", "abstract", "year", "predicted_relevance", "proba_yes", "AI_Confidence"]
+    description: "Decision-boundary audit: documents with P(relevant) in [0.40, 0.60]"
+
+# ── Internal canonical schema ──────────────────────────────────────────────────
+# All steps 2-9 use ONLY these column names.
+# Step 1 is the only one responsible for converting any source to this schema.
+schema:
+  # Identification
+  doi: "doi"
+  external_id: "external_id"               # source-native ID (WOS UT, OpenAlex W-ID, arXiv ID, PMID) — always filled
+  title: "title"
+  abstract: "abstract"
+  year: "year"
+  publication_date: "publication_date"     # ISO YYYY-MM-DD (enables month-level filtering)
+  language: "language"
+  document_type: "document_type"
+
+  # Authors — full lists
+  authors_list: "authors_list"                       # list of abbreviated names
+  authors_full_name_list: "authors_full_name_list"   # list of full names
+
+  # Authors — derived (first and last)
+  first_author: "first_author"
+  last_author: "last_author"
+  first_author_full_name: "first_author_full_name"
+  last_author_full_name: "last_author_full_name"
+
+  # Affiliations — full lists
+  authors_institution: "authors_institution"   # list of institutions per author
+  authors_country: "authors_country"           # list of countries per author
+
+  # Affiliations — derived (first and last)
+  first_institution: "first_institution"
+  last_institution: "last_institution"
+  first_country: "first_country"
+  last_country: "last_country"
+  first_country_region: "first_country_region" # always derived from the country
+  last_country_region: "last_country_region"   # always derived from the country
+
+  # Publication
+  source_journal: "source_journal"
+  journal_if: "journal_if"                     # impact factor
+  jnif: "jnif"                                 # always calculated (normalized)
+
+  # Citations
+  citation_count: "citation_count"
+  citations_per_year: "citations_per_year"     # always calculated
+
+  # Thematic classification
+  keywords: "keywords"                         # author keywords
+  research_areas: "research_areas"             # WOS Categories or OpenAlex Topics
+
+  # Traceability
+  raw_source: "raw_source"                     # "WOS" or "OpenAlex"
+
+# ── WOS mapping → canonical schema ────────────────────────────────────────
+source_mapping:
+  wos:
+    # Direct (original WOS columns)
+    doi: "DOI"
+    title: "Document Title"
+    abstract: "Abstract"
+    year: "Year Published"
+    language: "Language"
+    document_type: "Document Type"
+    citation_count: "Total Times Cited Count"
+    source_journal: "Publication Name"
+    keywords: "Author Keywords"
+    research_areas: "WOS Categories"           # or "Research Areas" as needed
+
+    # Derived by the worker from original WOS columns
+    authors_list: "authors_list"               # split(";") from "Authors"
+    authors_full_name_list: "authors_full_name_list"  # split(";") from "Author Full Name"
+    authors_institution: "authors_institution" # regex from "Author Address"
+    authors_country: "authors_country"         # regex from "Author Address"
+    first_author: "first_author"               # authors_list[0]
+    last_author: "last_author"                 # authors_list[-1]
+    first_author_full_name: "first_author_full_name"
+    last_author_full_name: "last_author_full_name"
+    first_institution: "first_institution"     # parse from "Author Address"
+    last_institution: "last_institution"
+    first_country: "first_country"             # parse from "Author Address"
+    last_country: "last_country"
+    first_country_region: "first_country_region"  # lookup from first_country
+    last_country_region: "last_country_region"
+
+    # Always calculated (regardless of source)
+    journal_if: "_computed_"                   # via impact_factor library
+    jnif: "_computed_"                         # IF normalization
+    citations_per_year: "_computed_"           # citation_count / (current_year - year)
+
+  openalex:
+    # Direct (native OpenAlex API fields)
+    doi: "doi"
+    title: "title"
+    abstract: "abstract"                       # reconstructed from abstract_inverted_index
+    year: "publication_year"
+    language: "language"                       # ISO 639-1, ex: "en"
+    document_type: "type"                      # ex: "article", "book-chapter"
+    citation_count: "cited_by_count"
+    source_journal: "primary_location.source.display_name"
+    journal_if: "primary_location.source.2yr_mean_citedness"  # native in OpenAlex!
+    keywords: "keywords"                       # list of OpenAlex keywords
+
+    # Thematic classification — different from WOS, requires a note
+    # OpenAlex uses hierarchical Topics (domain/field/subfield/topic)
+    # The worker extracts primary_topic.display_name and topics[].display_name
+    research_areas: "topics"                   # list of OpenAlex topics
+
+    # Derived by the worker from the authorships[] object
+    # Each item in authorships has: author.display_name, author_position,
+    # institutions[], countries[]
+    authors_list: "_from_authorships_"         # author.display_name of each item
+    authors_full_name_list: "_from_authorships_"  # same field (OpenAlex does not separate)
+    authors_institution: "_from_authorships_"  # institutions[].display_name per author
+    authors_country: "_from_authorships_"      # countries[] per author
+    first_author: "_from_authorships_"         # authorships[0].author.display_name
+    last_author: "_from_authorships_"          # authorships[-1].author.display_name
+    first_author_full_name: "_from_authorships_"
+    last_author_full_name: "_from_authorships_"
+    first_institution: "_from_authorships_"    # authorships[0].institutions[0].display_name
+    last_institution: "_from_authorships_"
+    first_country: "_from_authorships_"        # authorships[0].countries[0]
+    last_country: "_from_authorships_"
+
+    # Always calculated (same as WOS)
+    first_country_region: "_computed_"
+    last_country_region: "_computed_"
+    jnif: "_computed_"
+    citations_per_year: "_computed_"  

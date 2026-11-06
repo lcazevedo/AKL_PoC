@@ -1,0 +1,281 @@
+{
+  "_schema_version": "1.0",
+  "_description": "AKL pipeline execution state. Managed automatically by skills. Do not edit manually except for the 'current_step' field to force the re-execution of a step.",
+  "project": {
+    "name": "AKL (ML in chemistry and materials)",
+    "created_at": "2026-11-04T14:33:49",
+    "last_updated": "2026-11-04T14:55:47",
+    "workspace_path": ".",
+    "config_file": "pipeline_config.yaml",
+    "project_config_file": "project_config.md"
+  },
+  "current_step": 9,
+  "steps": {
+    "1": {
+      "name": "Bibliographic data acquisition",
+      "status": "completed",
+      "source": "",
+      "started_at": "2026-11-02T16:14:02",
+      "completed_at": "2026-11-02T16:23:32",
+      "output": {
+        "raw_data_file": "data/02_intermediate/step1_corpus_raw.pkl",
+        "raw_data_file_csv": "data/01_raw/step1_corpus_raw.csv"
+      },
+      "params_used": {
+        "source_type": "WOS + OpenAlex (merged)",
+        "openalex_query": "machine learning",
+        "upload_filename": "data/01_raw/data_wos.txt",
+        "records_raw": 71765,
+        "records_output": 61403,
+        "records_missing_abstract": 2449,
+        "records_removed_duplicates": 10362,
+        "merge_priority": [
+          "data/02_intermediate/step1_corpus_raw_wos.pkl",
+          "data/02_intermediate/step1_corpus_raw_openalex.pkl"
+        ]
+      },
+      "notes": "Outputs taken from the checkpoint of this step (SHA-256 recorded)."
+    },
+    "2": {
+      "name": "Data cleaning and structuring",
+      "status": "completed",
+      "started_at": "2026-11-02T16:51:16",
+      "completed_at": "2026-11-02T16:54:06",
+      "output": {
+        "corpus_file": "data/02_intermediate/step2_corpus_clean.pkl",
+        "quality_report_file": "data/04_reports/step2_quality_report.md",
+        "corpus_file_csv": "data/05_exports/step2_corpus_clean.csv"
+      },
+      "params_used": {
+        "source_format": "",
+        "fields_mapped": [],
+        "records_raw": 0,
+        "records_after_dedup": 0,
+        "records_missing_abstract": 0,
+        "input_file": "data/02_intermediate/step1_corpus_raw.pkl",
+        "records_input": 61403,
+        "records_output": 58000,
+        "removed_missing_mandatory": 2491,
+        "removed_abstract_quality": 9,
+        "removed_duplicates": 482,
+        "removed_missing_extra": 1,
+        "extra_fields_checked": [
+          "doi"
+        ],
+        "removed_year_filter": 363,
+        "year_window": "2000–2026",
+        "removed_language_filter": 57,
+        "language_filter": "English",
+        "detect_language": true
+      },
+      "notes": "Outputs taken from the checkpoint of this step (SHA-256 recorded)."
+    },
+    "3": {
+      "name": "Initial topic modeling (BERTopic)",
+      "status": "completed",
+      "started_at": "2026-11-04T14:41:28",
+      "completed_at": "2026-11-04T14:55:47",
+      "output": {
+        "topics_file": "data/05_exports/step3_topics_preliminary_layer_1_selected.xlsx",
+        "model_file": "data/checkpoints/step3_bertopic_model",
+        "embeddings_file": "",
+        "corpus_with_topics": "data/02_intermediate/step3_corpus_with_topics.pkl"
+      },
+      "params_used": {
+        "embedding_model": "BAAI/bge-base-en-v1.5",
+        "embedding_prompt": "",
+        "min_topic_size": 0,
+        "nr_topics": "",
+        "n_topics_found": 0,
+        "input_file": "data/02_intermediate/step2_corpus_clean.pkl",
+        "n_records": 58000,
+        "n_layers_found": 3,
+        "best_layer": 1,
+        "n_topics_best_layer": 30,
+        "naming_mode": "vllm"
+      },
+      "notes": "Embedding server not reachable at http://<my_local_IP_2>:8001/v1. Check the VPN and that the container is running, or set embedding_server.enabled: false to compute embeddings locally. Details: Embedding server http://<my_local_IP_2>:8001/v1 failed (attempt 3/3): Connection error."
+    },
+    "4": {
+      "name": "Specialized curation and sampling",
+      "status": "completed",
+      "started_at": "",
+      "completed_at": "",
+      "output": {
+        "review_file": "",
+        "curation_reference_file": "",
+        "labels_file": "data/03_review/labels_relevance.csv"
+      },
+      "params_used": {
+        "sample_size": 0,
+        "relevant_count": 344,
+        "not_relevant_count": 225,
+        "llm_model_used": "",
+        "suggested_yes": 0,
+        "suggested_no": 0,
+        "llm_mode": "imported"
+      },
+      "validation": {
+        "status": "completed",
+        "suggested_at": "",
+        "validated_at": "2026-11-04T14:34:19.781342",
+        "corrections_made": false,
+        "imported_labels": true
+      },
+      "notes": ""
+    },
+    "5": {
+      "name": "Corpus filtering model (SetFit)",
+      "status": "completed",
+      "started_at": "2026-11-04T16:08:01",
+      "completed_at": "2026-11-04T16:09:30",
+      "output": {
+        "corpus_filtered_file": "",
+        "model_file": "data/checkpoints/setfit_model",
+        "confusion_matrix_file": "",
+        "setfit_report_file": "data/04_reports/step5_setfit_report.md",
+        "corpus_relevant_pkl": "data/02_intermediate/step5_corpus_filtered_relevant.pkl",
+        "corpus_not_relevant_pkl": "data/02_intermediate/step5_corpus_filtered_not_relevant.pkl",
+        "corpus_relevant_xlsx": "data/05_exports/step5_corpus_filtered_relevant.xlsx",
+        "corpus_not_relevant_xlsx": "data/05_exports/step5_corpus_filtered_not_relevant.xlsx",
+        "full_predictions_pkl": "data/02_intermediate/step5_full_predictions.pkl"
+      },
+      "params_used": {
+        "setfit_base_model": "all-MiniLM-L6-v2",
+        "num_epochs": 0,
+        "batch_size": 0,
+        "accuracy": 0.7402597402597403,
+        "records_before": 58000,
+        "records_after": 48030,
+        "f1_score": 0.7300140252454418,
+        "records_discarded": 9970,
+        "retention_accuracy": 0.929701230228471,
+        "split_method": "GroupShuffleSplit (grouped by Step-3 topic)"
+      },
+      "notes": "Cannot save file into a non-existent directory: 'data/05_exports'"
+    },
+    "6": {
+      "name": "High-fidelity topic mapping (EVOC)",
+      "status": "completed",
+      "started_at": "2026-11-04T16:55:48",
+      "completed_at": "2026-11-04T17:00:33",
+      "output": {
+        "topics_final_file": "data/05_exports/step6_topics_final_layer_3_selected.xlsx",
+        "model_file": "data/checkpoints/step6_bertopic_model",
+        "cvi_report_file": "data/04_reports/step6_cvi_report.md",
+        "kneedle_plot_file": "data/04_reports/step6_kneedle_plot.png",
+        "cluster_maps_folder": "data/04_reports/step6_cluster_maps"
+      },
+      "params_used": {
+        "embedding_model": "",
+        "min_cluster_size": 0,
+        "metric": "",
+        "n_topics_found": 60,
+        "cvi_alpha": -2.8463291060172016,
+        "best_layer": 3,
+        "naming_mode": "vllm"
+      },
+      "validation": {
+        "status": "completed",
+        "consensus_reached": false,
+        "suggested_layers": {
+          "cvi1_sqrt": 2,
+          "cvi2_adaptive": 0,
+          "kneedle": 2
+        },
+        "validated_at": "2026-11-04T17:00:33.257731"
+      },
+      "notes": "No CVI consensus (CVI1 sqrt: layer 2 [145 topics, above the 100-topic naming cap]; CVI2: layer 0; Kneedle: layer 2). Specialist chose layer 3 (60 topics, CVI1 0.0413 vs 0.0428 for layer 2): a documented deviation from the a-priori CVI-1 rule, because layer 2 would not be named."
+    },
+    "7": {
+      "name": "Semantic enrichment (LLM and clustering)",
+      "status": "completed",
+      "started_at": "2026-11-04T19:09:21",
+      "completed_at": "2026-11-04T19:10:03",
+      "output": {
+        "enriched_corpus_file": "",
+        "extraction_files": {},
+        "extractions_pkl": "data/02_intermediate/step7_extractions.pkl",
+        "extractions_xlsx": "data/05_exports/step7_extractions.xlsx"
+      },
+      "params_used": {
+        "llm_model": "RedHatAI/gemma-3-12b-it-quantized.w4a16",
+        "vllm_base_url": "http://<my_local_IP_2>:8000/v1",
+        "chunk_unit": "abstract,sentence",
+        "vectors_extracted": [
+          "application_challenges",
+          "application_task",
+          "benchmarks_datasets",
+          "best_practices",
+          "challenges",
+          "data_source",
+          "directions",
+          "findings",
+          "material_system",
+          "ml_methods",
+          "target_property",
+          "validation"
+        ],
+        "batch_size": 32,
+        "records_processed": 426238,
+        "checkpoint_last": "directions",
+        "vector_counts": {
+          "application_challenges": 46856,
+          "application_task": 47325,
+          "benchmarks_datasets": 4841,
+          "best_practices": 17544,
+          "challenges": 27027,
+          "data_source": 36928,
+          "directions": 28876,
+          "findings": 41063,
+          "material_system": 44595,
+          "ml_methods": 45199,
+          "target_property": 42757,
+          "validation": 43227
+        },
+        "extraction_reuse": {}
+      },
+      "notes": "No reachable vLLM endpoint."
+    },
+    "8": {
+      "name": "Specialized study and synthesis",
+      "status": "completed",
+      "started_at": "2026-11-04T19:10:45",
+      "completed_at": "2026-11-04T19:41:40",
+      "output": {
+        "insights_file": "",
+        "knowledge_gaps_file": "",
+        "visualizations_requested_file": ""
+      },
+      "params_used": {
+        "llm_model_used": "",
+        "n_insights_suggested": 0,
+        "n_insights_validated": 0
+      },
+      "validation": {
+        "status": "validated",
+        "suggested_at": "",
+        "validated_at": "2026-11-04T19:41:40",
+        "corrections_made": false
+      },
+      "notes": "Specialist validated the preliminary synthesis. The extraction audit sheets had been labeled by the expert (results/audits). Boundary audit left to the blind relevance sample (WP2)."
+    },
+    "9": {
+      "name": "Communication and final presentation",
+      "status": "completed",
+      "started_at": "2026-11-04T19:43:12",
+      "completed_at": "2026-11-04T19:59:46",
+      "output": {
+        "report_file": "",
+        "figures_folder": "",
+        "knowledge_landscape_file": ""
+      },
+      "params_used": {
+        "figures_format": "",
+        "figures_dpi": 0,
+        "visualizations_generated": []
+      },
+      "notes": ""
+    }
+  }
+}
