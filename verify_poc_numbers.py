@@ -30,7 +30,14 @@ def norm(s):
     return s.astype(str).str.strip().str.lower()
 
 
-print("== Step 4: expert relevance labels")
+print("== Steps 1 and 2: retrieved records")
+raw = pd.read_csv(R / "step1/step1_retrieved_records.csv", keep_default_na=False)
+print("retrieved:", len(raw), raw["source"].value_counts().to_dict())
+fate = raw["fate"].value_counts()
+dedup = len(raw) - fate["removed_step1_duplicate"]
+print("after deduplication:", dedup, "| after cleaning:", dedup - fate["removed_step2_cleaning"])
+
+print("\n== Step 4: expert relevance labels")
 lab = pd.read_csv(R / "step4/step4_expert_relevance_labels.csv")
 lab["doi"] = norm(lab["doi"])
 print("labels:", len(lab), lab["label"].value_counts().to_dict())

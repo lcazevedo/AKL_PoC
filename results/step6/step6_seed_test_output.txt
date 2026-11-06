@@ -1,0 +1,9 @@
+seed 42 topics [1117, 346, 145, 60, 14, 5] noise% [64.1, 54.6, 44.9, 40.5, 36.4, 42.6]
+ layer 0 no saved assignment
+ layer 1 no saved assignment
+ layer 2 no saved assignment
+ layer 3 ARI reassigned 1.0 identical True ARI non-noise 1.0
+ layer 4 ARI reassigned 1.0 identical True ARI non-noise 1.0
+ layer 5 ARI reassigned 1.0 identical True ARI non-noise 1.0
+seed 7 topics [1120, 380, 159, 65, 12] noise% [63.9, 53.8, 43.8, 38.8, 40.5]
+seed 123 topics [1123, 462, 159, 59, 25, 8] noise% [64.9, 56.8, 46.7, 40.4, 42.0, 36.2]
