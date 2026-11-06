@@ -31,7 +31,7 @@ def norm(s):
 
 
 print("== Steps 1 and 2: retrieved records")
-raw = pd.read_csv(R / "step1/step1_retrieved_records.csv", keep_default_na=False)
+raw = pd.read_csv(R / "step1/step1_retrieved_records.csv", keep_default_na=False, dtype=str)
 print("retrieved:", len(raw), raw["source"].value_counts().to_dict())
 fate = raw["fate"].value_counts()
 dedup = len(raw) - fate["removed_step1_duplicate"]
