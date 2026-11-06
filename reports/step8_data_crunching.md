@@ -243,7 +243,7 @@ Classifies documents using median Journal IF and Citations Per Year (CPY). Shows
 
 ## 5. Automated Audits
 
-### EVoC Sensitivity (reviewer #5)
+### EVoC Sensitivity
 
 Pairwise Adjusted Rand Index (ARI) between the EVoC layers computed in Step 6. ARI > 0.7 indicates stable clustering across resolutions; 0.3–0.7 moderate; < 0.3 sensitive (the layer choice materially changes the topic map).
 
@@ -253,7 +253,7 @@ Pairwise Adjusted Rand Index (ARI) between the EVoC layers computed in Step 6. A
 | Layer 3 vs Layer 5 | 60 → 5 | 0.094 |
 | Layer 4 vs Layer 5 | 14 → 5 | 0.367 |
 
-### Regression Audit (reviewer #9)
+### Regression Audit
 
 OLS of log1p(citation_count) on Step-6 topics (top 10 + Other), centered year, and journal IF (with missingness dummy). n = 47905 documents, k = 14 predictors.
 
@@ -278,7 +278,7 @@ Kruskal-Wallis across topics: H = 122.54, p = 0.0000 (p < 0.05 → citation coun
 
 Robustness (drop journal IF): max |Δcoef| = 0.370 across shared predictors (small → coefficients stable).
 
-### Growth Model Fitting (reviewer #11)
+### Growth Model Fitting
 
 Formal model selection per macro-category: Plateau (constant), Linear, or Exponential (log-linear), chosen by minimum AICc. ΔAICc < 2 → models are statistically indistinguishable. The heuristic recent-ratio is kept for continuity with the original classification.
 
@@ -305,6 +305,6 @@ Formal model selection per macro-category: Plateau (constant), Linear, or Expone
 | Material Performance Characteristics |        27 |             4384 |           0.57 | Exponential  |   29.6 |         -331.9 |
 | Machine Learning in Chemistry        |        25 |             4252 |           0.66 | Exponential  |   70.8 |         -274.3 |
 
-### Relevance Index Sensitivity (reviewer #10)
+### Relevance Index Sensitivity
 
 Skipped: no Relevance Index column is computed in this pipeline (RI is not standard in AKL). If RI is added later, this audit will verify the unit-invariance of the ranking.

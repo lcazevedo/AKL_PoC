@@ -36,7 +36,7 @@ You can sort the Excel files by this column to review the documents the AI strug
 - Head class_weight: `balanced`
 - Decision threshold on P(yes): **0.5**
 
-## Retention Check (Reviewer Validation #4)
+## Retention Check
 The trained model was re-applied to all 569 documents labeled by the
 specialist in Step 4 (344 relevant, 225 not relevant) to verify it retains the
 expert's labels.
